@@ -60,7 +60,7 @@ export default function MdLCheckIn(props) {
           throw error;
         }
       );
-      console.log("add transaction", response);
+      console.log("add transaction", response.data.data);
 
       if (response.status === 200) {
         Swal.fire({
@@ -74,7 +74,7 @@ export default function MdLCheckIn(props) {
           check_in: "",
           check_out: "",
         });
-        navigate(`/my-booking/${id}`)
+        navigate(`/my-booking/${response.data.data.id}`)
       }
     } catch (error) {
       Swal.fire({

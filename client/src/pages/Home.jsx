@@ -6,17 +6,15 @@ import { useQuery } from "react-query";
 import { API } from "../config/api";
 import { SideBar } from "../components/SideBar";
 
-function Home() {
+function Home(props) {
   const [showForm, setShowForm] = useState(false);
   const handleCloseForm = () => {
     setShowForm(false); 
   }
 
-  let { data: houses } = useQuery("housesCache", async () => {
-    const response = await API.get("/houses");
-    console.log("ini respone house", response.data.data);
-    return response.data.data;
-  });
+  
+  const houses = props?.data 
+
 
   return (
     <>
@@ -24,9 +22,9 @@ function Home() {
       {/* <Col md={7} lg={8} className="bg-light p-4 ms-auto"> */}
       <Row xs={1} md={2} lg={3} className="g-4">
         {houses?.map((item, index) => (
-          <Col className="" key={index}>
+          <Col className="" key={index} >
             <Link
-              to={`/detail-property/` + item.id}
+              to={`/detail-property/${item.id}`}
               className="text-decoration-none text-dark"
               style={{ cursor: "pointer" }}
             >
@@ -54,14 +52,14 @@ function Home() {
                     {item.bedroom} beds, {item.bathroom} bath, 1.800 sqft{" "}
                   </Card.Text>
                   <Card.Text style={{ color: "#A8A8A8" }}>
-                    {item.city_name}
+                    {item.city_name}, {item.area}
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Link>
           </Col>
         ))}
-        <SideBar show={showForm} onHide={handleCloseForm}/>
+        <SideBar show={showForm} onHide={handleCloseForm} Price={props.Price} Bedroom={props.Bedroom} Bathroom={props.Bathroom} setSearch={props.setSearch} refetch={props.refetch} typeRent={props.typeRent} setTypeRent={props.setTypeRent} setBedroom={props.setBedroom} setBathroom={props.setBathroom} setPrice={props.setPrice}/>
       </Row>
     </>
   );

@@ -2,6 +2,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Button, Form, InputGroup, ToggleButton, ToggleButtonGroup, } from "react-bootstrap";
 
 export const SideBar = (props) => {
+
+  const OnChangeHandler = () => {
+    props.setPrice(document.getElementById("price").value)
+  };
+  console.log("ini price bos ", props.Price)
+
+
   return (
     <>
       <Offcanvas show={props.show} onHide={props.onHide}>
@@ -32,7 +39,8 @@ export const SideBar = (props) => {
                     name="type_rent"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="Day"
-                    value="Day"
+                    value={props.typeRent === "Day"}
+                    onClick={() => props.setTypeRent("Day")}
                   >
                     Day
                   </ToggleButton>
@@ -41,7 +49,8 @@ export const SideBar = (props) => {
                     name="type_rent"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="Month"
-                    value="Month"
+                    value={props.typeRent === "Month"}
+                    onClick={() => props.setTypeRent("Month")}
                   >
                     Month
                   </ToggleButton>
@@ -50,7 +59,8 @@ export const SideBar = (props) => {
                     name="type_rent"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="Year"
-                    value="Year"
+                    value={props.typeRent === "Year"}
+                    onClick={() => props.setTypeRent("Year")}
                   >
                     Year
                   </ToggleButton>
@@ -88,7 +98,8 @@ export const SideBar = (props) => {
                     name="bedroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bedroom-1"
-                    value="1"
+                    value={props.Bedroom === "1"} 
+                    onClick={() => props.setBedroom("1")}
                   >
                     1
                   </ToggleButton>
@@ -97,7 +108,8 @@ export const SideBar = (props) => {
                     name="bedroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bedroom-2"
-                    value="2"
+                    value={props.Bedroom === "2"} 
+                     onClick={() => props.setBedroom("2")}
                   >
                     2
                   </ToggleButton>
@@ -106,7 +118,8 @@ export const SideBar = (props) => {
                     name="bedroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bedroom-3"
-                    value="3"
+                    value={props.Bedroom === "3"} 
+                    onClick={() => props.setBedroom("3")}
                   >
                     3
                   </ToggleButton>
@@ -115,7 +128,8 @@ export const SideBar = (props) => {
                     name="bedroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bedroom-4"
-                    value="4"
+                    value={props.Bedroom === "4"} 
+                    onClick={() => props.setBedroom("4")}
                   >
                     4
                   </ToggleButton>
@@ -124,7 +138,8 @@ export const SideBar = (props) => {
                     name="bedroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bedroom-5"
-                    value="5"
+                    value={props.Bedroom === "5"} 
+                    onClick={() => props.setBedroom("5")}
                   >
                     5+
                   </ToggleButton>
@@ -150,7 +165,8 @@ export const SideBar = (props) => {
                     name="bathroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bathroom-1"
-                    value={1}
+                    value={props.Bathroom === "1"} 
+                    onClick={() => props.setBathroom("1")}
                   >
                     1
                   </ToggleButton>
@@ -159,7 +175,8 @@ export const SideBar = (props) => {
                     name="bathroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bathroom-2"
-                    value={2}
+                    value={props.Bathroom === "2"} 
+                    onClick={() => props.setBathroom("2")}
                   >
                     2
                   </ToggleButton>
@@ -168,7 +185,8 @@ export const SideBar = (props) => {
                     name="bathroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bathroom-3"
-                    value={3}
+                    value={props.Bathroom === "3"} 
+                    onClick={() => props.setBathroom("3")}
                   >
                     3
                   </ToggleButton>
@@ -177,7 +195,8 @@ export const SideBar = (props) => {
                     name="bathroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bathroom-4"
-                    value={4}
+                    value={props.Bathroom === "4"} 
+                    onClick={() => props.setBathroom("4")}
                   >
                     4
                   </ToggleButton>
@@ -186,7 +205,8 @@ export const SideBar = (props) => {
                     name="bathroom"
                     className="fw-semibold text-dark bd rounded-2 bg w-100"
                     id="bathroom-5"
-                    value={5}
+                    value={props.Bathroom === "5"} 
+                    onClick={() => props.setBathroom("5")}
                   >
                     5+
                   </ToggleButton>
@@ -284,6 +304,9 @@ export const SideBar = (props) => {
                   type="text"
                   name="price"
                   className="w-50"
+                  id="price"
+                  onChange={OnChangeHandler}
+                  value={props.Price}
                   placeholder="8.000.000"
                 />
               </Form.Group>
@@ -291,9 +314,8 @@ export const SideBar = (props) => {
             <div className="d-flex justify-content-end">
               <Button
                 variant="dark"
-                type="submit"
                 style={{ width: "140px", height: "50px" }}
-              >
+                onClick={() => props.refetch()}>
                 APPLY
               </Button>
             </div>

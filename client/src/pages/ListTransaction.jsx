@@ -1,10 +1,16 @@
 import search_1 from "../assets/search_1.png";
+import { API } from "../config/api";
+import { useQuery, useMutation } from "react-query";
 
 export const ListTransaction = () => {
+  let { data: transactions } = useQuery("ownertransactionCache", async () => {
+    const response = await API.get("/transactions");
+    console.log("ini list transaction :", response.data.data);
+    return response.data.data;
+  });
   return (
-
     <div>
-        <h2 className="mt-3">List Transaction</h2>
+      <h2 className="mt-3">List Transaction</h2>
       <table className="table mt-5">
         <thead>
           <tr>
@@ -15,15 +21,23 @@ export const ListTransaction = () => {
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Furnished</td>
-            <td className="text-danger fw-semibold">Pending</td>
-            <td><img src={search_1} alt="" /></td>
-          </tr>
-        </tbody>
+        {transactions?.map((data, index) => (
+          <tbody key={index}>
+            <tr>
+              <th scope="row"></th>
+              <td>{data?.user.fullname}</td>
+              <td>{data?.house.type_rent}</td>
+              {data?.status === "success" ? (
+              <td className="text-success fw-semibold">{data?.status}</td>
+              ):(
+                <td className="text-danger fw-semibold">{data?.status}</td>
+              )}
+              <td>
+                <img src={search_1} alt="" />
+              </td>
+            </tr>
+          </tbody>
+        ))}
       </table>
     </div>
   );

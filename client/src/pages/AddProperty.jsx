@@ -26,39 +26,41 @@ export const AddProperty = () => {
 
   console.log(form);
   
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      let newAmenities = [...form.amenities];
-      if (checked) {
-        newAmenities.push(value);
-      } else {
-        newAmenities = newAmenities.filter((amen) => amen !== value);
-      }
-      setForm({ ...form, amenities: newAmenities });
+// const {name, city_name, address, price, type_rent, amenities, bedroom, bathroom, area, image, description} = form;
+const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+  if (type === "checkbox") {
+    let newAmenities = [...form.amenities];
+    if (checked) {
+      newAmenities.push(name);
     } else {
-      setForm({
-        ...form,
-        [name]: type === "file" ? e.target.files : e.target.value,
-      });
+      newAmenities = newAmenities.filter((amenity) => amenity !== name);
     }
-    if (e.target.type === "file") {
-      let url = URL.createObjectURL(e.target.files[0]);
-      setPreview(url);
-    }
-  };
+    setForm({ ...form, amenities: newAmenities });
+  } else {
+    setForm({
+      ...form,
+      [name]: type === "file" ? e.target.files : value,
+    });
+  }
+  if (e.target.type === "file") {
+    let url = URL.createObjectURL(e.target.files[0]);
+    console.log("test", url);
+    setPreview(url);
+  }
+};
+
 
   
   const handleSubmit = useMutation(async (e) => {
     try {
+      e.preventDefault();
+
       const config = {
         headers: {
           'Content-type': 'multipart/form-data',
         },
       };
-
-      e.preventDefault();
 
       const formData = new FormData();
       formData.set("name", form.name);
@@ -195,8 +197,8 @@ export const AddProperty = () => {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className="mb-3 d-flex flex-column" controlId="amenities">
-            <Form.Label className="fw-bold">Amenities</Form.Label>
+          <Form.Label className="fw-bold">Amenities</Form.Label>
+          <Form.Group className="mb-3 d-flex flex-column" controlId="Amenities">
             <Form.Group className="d-flex gap-4">
               <Form.Check
                 onChange={handleChange}

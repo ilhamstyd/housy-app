@@ -1,25 +1,15 @@
 import { Button, Card, Container } from "react-bootstrap";
-import { MdlConfirmation } from "../components/MdlConfirmation";
-import { useState } from "react";
 import { API, setAuthToken } from "../config/api";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import qr from "../assets/qr-code-1.png"
 
 export const MyBooking = () => {
 
-  // const handleBuy = async (id) => {
-  //   try {
-  //     const response = await API.get(`/transaction/${id}`);
-  //     // navigate(`/payment/${param.id}`);
-  //     console.log("test :", response.data.data);
-  //     return response.data.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   setAuthToken(localStorage.token);
 
-  let { data: transaction } = useQuery("transactioneCache", async () => {
+  let { data: transaction } = useQuery("transactioneCaches", async () => {
     const response = await API.get(`/transaction-client`);
     console.log("mytbookingpending", response.data.data);
     return response.data.data;
@@ -33,7 +23,7 @@ export const MyBooking = () => {
           <Card
           key={index}
             className="ms-5"
-            style={{ width: "1035px", height: "344px", marginTop:"90px" }}
+            style={{ width: "1035px", height: "370px", marginTop:"20px" }}
           >
             <div className="mt-3">
               <img src="/images/Icon.png" alt="Rectangle" />
@@ -46,8 +36,14 @@ export const MyBooking = () => {
               <p className=" fw-semibold text-secondary">
                 sabtu, 21 Februari 2022
               </p>
-              {/* <img className=" mt-3" src="/images/Icon.png" alt="" />
-  <p className="mt-3">INV0101</p> */}
+              {transactions?.status === "success" ? (
+                  <>
+                    <img className=" mt-3" src={qr} alt="" />
+                    <p className="mt-3">INV0101</p>
+                  </>
+                ) : (
+                  <p></p>
+                )}
             </div>
 
             <div className="d-flex">
@@ -55,17 +51,32 @@ export const MyBooking = () => {
                 <h2 className="ms-2 fw-bold">{transactions?.house.name}</h2>
                 <p className="ms-2">{transactions?.house.address}</p>
 
+                {transaction.status === "pending" ? (
+              <div
+              className="font-size-14px text-center rounded ms-5 mt-3"
+              style={{
+                width: "69px",
+                height: "24px",
+                color: "#FF9900",
+                backgroundColor: "rgba(255,153,0,0.125)",
+              }}
+            >
+              <p>{transactions?.status}</p>
+            </div>                
+              ):(
                 <div
                   className="font-size-14px text-center rounded ms-5 mt-3"
                   style={{
                     width: "69px",
                     height: "24px",
-                    color: "#FF9900",
+                    color: "green",
                     backgroundColor: "rgba(255,153,0,0.125)",
                   }}
                 >
                   <p>{transactions?.status}</p>
                 </div>
+              )}
+                
               </div>
               <div style={{ marginLeft: "200px" }}>
                 <div
@@ -102,7 +113,11 @@ export const MyBooking = () => {
               <div className="ms-5 mt-1">
                 <div>
                   <h5 className="fw-bold">Amenities</h5>
-                  <h5 className="text-secondary">{transactions?.house.amenities}</h5>
+                  {transactions?.house.amenities?.map((amenity, idx) => (
+                <h5 key={idx} className="text-secondary">
+                    {amenity},
+                </h5>
+                  ))}
                 </div>
                 <div className="mt-4">
                   <h5 className="fw-bold">Type Of Rent</h5>
@@ -116,7 +131,7 @@ export const MyBooking = () => {
               <p className="col col-sm-2">Nama Pemesan</p>
               <p className="col col-sm-2">No. Handphone</p>
               <p className="col col-sm-2">Email</p>
-              <p className="col col-sm-4"></p>
+              <p className="col col-sm-3"></p>
               <hr />
             </div>
 
@@ -124,14 +139,17 @@ export const MyBooking = () => {
               <p className="col col-sm-2">{transactions?.user.id}</p>
               <p className="col col-sm-2">{transactions?.user.fullname}</p>
               <p className="col col-sm-2">{transactions?.user.phone}</p>
-              <p className="col col-sm-2">{transactions?.user.email}</p>
-              <p className="col text-black col-sm-4 text-center fw-bold">
-                Long Time Rent : {transactions?.total_duration} Days
+              <p className="col col-sm-3">{transactions?.user.email}</p>
+              <p className="col text-black col-sm-3 text-center fw-bold">
+                Long Time Rent : {transactions?.total_duration} {transactions?.house.type_rent} 
               </p>
             </div>
-            <div className="mt-3" style={{ marginLeft: "780px", marginBottom:"50px"}}>
-              <h5>Total : RP. {transactions?.price}</h5>
-              <Button className="btn btn-dark">PAY NOW</Button>
+            <div className="mb-5" style={{ marginLeft: "830px"}}>
+              {transaction.status === "pending" ? (
+              <h5 className="text-danger">Total : RP. {transactions?.price}</h5>                
+              ):(
+                <h5 className="text-success">Total : RP. {transactions?.price}</h5>
+              )}
             </div>
           </Card>
         ))}

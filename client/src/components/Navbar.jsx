@@ -11,7 +11,7 @@ import icon_user from "../assets/icon_user.png"
 import cabin from "../assets/cabin_1.png"
 import bill from "../assets/icon_bill.png"
 
-function NavigationBar() {
+function NavigationBar(props) {
   const Navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [showLogin, setShowLogin] = useState(false);
@@ -46,6 +46,11 @@ function NavigationBar() {
     Navigate("/");
     // window.location.reload();
   };
+
+  const HandleChange = () => {
+    props.setSearch(document.getElementById("search").value)
+  }
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -67,12 +72,15 @@ function NavigationBar() {
               <Form className="d-flex">
                 <Form.Control
                   type="search"
+                  id="search"
+                  onChange={HandleChange}
+                  value={props.search}
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
                   
                   />
-                <Button variant="light" type="submit">
+                <Button variant="light" onClick={() => props.refetch()}>
                   <img
                     src="/images/search 1.png"
                     style={{ objectFit: "cover", width: "25px" }}
@@ -114,8 +122,8 @@ function NavigationBar() {
                       <NavDropdown.Divider style={{ background: "#EC7AB7" }} />
                         <NavDropdown.Item className="d-flex align-items-center">
                         <img src={bill} alt="" />
-                        <Link to="/my-ticket" className='text-decoration-none text-dark'>
-                          <span className="ms-3 fw-bold">History</span></Link>
+                        <Link to="/list-transaction" className='text-decoration-none text-dark'>
+                          <span className="ms-3 fw-bold">List Transaction</span></Link>
                       </NavDropdown.Item>
                       <NavDropdown.Divider style={{ background: "#EC7AB7" }} />
                       <NavDropdown.Item
@@ -159,7 +167,7 @@ function NavigationBar() {
                       <NavDropdown.Divider style={{ background: "#EC7AB7" }} />
                         <NavDropdown.Item className="d-flex align-items-center">
                         <img src={cabin} alt="" />
-                        <Link to="/my-booking" className='text-decoration-none text-dark'>
+                        <Link to="/history" className='text-decoration-none text-dark'>
                           <span className="ms-3 fw-bold">History</span></Link>
                       </NavDropdown.Item>
                       <NavDropdown.Divider style={{ background: "#EC7AB7" }} />

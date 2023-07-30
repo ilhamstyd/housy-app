@@ -48,7 +48,7 @@ func (r *repository) UpdateHouse(house models.House) (models.House, error) {
 
 func (r *repository) FilterHouse(cityName, TypeRent string, bedroom, bathroom, price int) ([]models.House, error) {
 	var house []models.House
-	err := r.db.Where("city_name = ? AND type_rent = ? AND bedroom = ? AND bathroom = ? AND price = < ?", cityName, TypeRent, bedroom, bathroom, price).Find(&house).Error
+	err := r.db.Where("city_name = ? AND type_rent = ? AND bedroom = ? AND bathroom = ? AND price < ?", cityName, TypeRent, bedroom, bathroom, price).Find(&house).Error
 
 	return house, err
 }
@@ -58,9 +58,9 @@ func (r *repository) FilterCity(cityName string) ([]models.House, error) {
 
 	return house, err
 }
-func (r *repository) FilterSide(TypeRent string, bedroom, bathroom, price int) ([]models.House, error) {
+func (r *repository) FilterSide(TypeRent string, bathroom, bedroom, price int) ([]models.House, error) {
 	var house []models.House
-	err := r.db.Where("type_rent = ? AND bedroom = ? AND bathroom = ? AND price < ?", TypeRent, bedroom, bathroom, price).Find(&house).Error
+	err := r.db.Where("type_rent = ? AND bathroom = ? AND bedroom = ? AND price < ?", TypeRent, bathroom, bedroom, price).Find(&house).Error
 
 	return house, err
 }

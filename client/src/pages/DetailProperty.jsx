@@ -14,9 +14,9 @@ export const DetailProperty = () => {
 
   const Navigate = useNavigate()
   const { id } = useParams();
-
+console.log("ini id detaiproperty", id)
   let { data: house } = useQuery("houseCache", async () => {
-    const response = await API.get("/house/" + id);
+    const response = await API.get(`/house/${id}`);
     return response.data.data;
   });
 
@@ -52,7 +52,7 @@ export const DetailProperty = () => {
           </div>
         </div>
         <div className="text-star" style={{ marginLeft: "160px" }}>
-          <h1 className="mt-3">House Astine</h1>
+          <h1 className="mt-3">{house?.name}</h1>
           <div className="d-flex">
             <h4>RP. {house?.price} / {house?.type_rent}</h4>
             <h5 style={{ marginLeft: "510px" }}>{house?.bedroom} beds
