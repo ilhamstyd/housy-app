@@ -9,6 +9,7 @@ import MdLCheckIn from "../components/MdLCheckIn";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
+import { Rupiah } from "../components/FormatIdr";
 
 export const DetailProperty = () => {
 
@@ -54,7 +55,7 @@ console.log("ini id detaiproperty", id)
         <div className="text-star" style={{ marginLeft: "160px" }}>
           <h1 className="mt-3">{house?.name}</h1>
           <div className="d-flex">
-            <h4>RP. {house?.price} / {house?.type_rent}</h4>
+            <h4>{Rupiah(house?.price)} / {house?.type_rent}</h4>
             <h5 style={{ marginLeft: "510px" }}>{house?.bedroom} beds
             <img src={bed_1} className="ms-2"/></h5>
             <h5 style={{ marginLeft: "10px" }}>{house?.bathroom} bath

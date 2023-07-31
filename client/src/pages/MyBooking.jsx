@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "react-query";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import qr from "../assets/qr-code-1.png"
+import { Rupiah } from "../components/FormatIdr";
 
 export const MyBooking = () => {
 
@@ -23,7 +24,7 @@ export const MyBooking = () => {
           <Card
           key={index}
             className="ms-5"
-            style={{ width: "1035px", height: "370px", marginTop:"20px" }}
+            style={{ width: "1035px", height: "380px", marginTop:"20px" }}
           >
             <div className="mt-3">
               <img src="/images/Icon.png" alt="Rectangle" />
@@ -51,7 +52,7 @@ export const MyBooking = () => {
                 <h2 className="ms-2 fw-bold">{transactions?.house.name}</h2>
                 <p className="ms-2">{transactions?.house.address}</p>
 
-                {transaction.status === "pending" ? (
+                {transactions?.status === "pending" ? (
               <div
               className="font-size-14px text-center rounded ms-5 mt-3"
               style={{
@@ -142,11 +143,11 @@ export const MyBooking = () => {
                 Long Time Rent : {transactions?.total_duration} {transactions?.house.type_rent} 
               </p>
             </div>
-            <div className="mb-5" style={{ marginLeft: "830px"}}>
-              {transaction.status === "pending" ? (
-              <h5 className="text-danger">Total : RP. {transactions?.price}</h5>                
+            <div className="mb-5" style={{ marginLeft: "730px"}}>
+              {transactions?.status === "success" ? (
+              <h5 className="text-success">Total : {Rupiah(transactions?.price)}</h5>                
               ):(
-                <h5 className="text-success">Total : RP. {transactions?.price}</h5>
+                <h5 className="text-danger">Total : {Rupiah(transactions?.price)}</h5>
               )}
             </div>
           </Card>

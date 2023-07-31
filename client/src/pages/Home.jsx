@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
 import { SideBar } from "../components/SideBar";
+import { Rupiah } from "../components/FormatIdr";
+
 
 function Home(props) {
   const [showForm, setShowForm] = useState(false);
@@ -47,7 +49,7 @@ function Home(props) {
                   ))}
                 </div>
                 <Card.Body className="px-0">
-                  <Card.Title className="fw-bold">RP. {item.price}</Card.Title>
+                  <Card.Title className="fw-bold">{Rupiah(item.price)}</Card.Title>
                   <Card.Text className="fw-semibold mb-0">
                     {item.bedroom} beds, {item.bathroom} bath, 1.800 sqft{" "}
                   </Card.Text>

@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "react-query";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import qr from "../assets/qr-code-1.png"
+import { Rupiah } from "../components/FormatIdr";
 
 export const History = () => {
 
@@ -26,7 +27,7 @@ export const History = () => {
           <Card
           key={index}
             className="ms-5"
-            style={{ width: "1035px", height: "370px", marginTop:"20px" }}
+            style={{ width: "1035px", height: "380px", marginTop:"20px" }}
           >
             <div className="mt-3">
               <img src="/images/Icon.png" alt="Rectangle" />
@@ -143,11 +144,11 @@ export const History = () => {
                 Long Time Rent : {transaction?.total_duration} {transaction?.house.type_rent} 
               </p>
             </div>
-            <div className="mb-5" style={{ marginLeft: "830px"}}>
+            <div className="mb-5" style={{ marginLeft: "700px"}}>
               {transaction.status === "pending" ? (
-              <h5 className="text-danger">Total : RP. {transaction?.price}</h5>                
+              <h5 className="text-danger">Total : {Rupiah(transaction?.price)}</h5>                
               ):(
-                <h5 className="text-success">Total : RP. {transaction?.price}</h5>
+                <h5 className="text-success">Total : RP. {Rupiah(transaction?.price)}</h5>
               )}
             </div>
           </Card>

@@ -3,6 +3,7 @@ import { API, setAuthToken } from "../config/api";
 import { useQuery, useMutation } from "react-query";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Rupiah } from "../components/FormatIdr";
 
 export const MyBookingPending = () => {
   const i = useParams();
@@ -171,10 +172,10 @@ export const MyBookingPending = () => {
             </p>
           </div>
           <div
-            className="mt-4"
+            className="mt-2"
             style={{ marginLeft: "830px" }}
           >
-            <h5>Total : RP. {transactions?.price}</h5>
+            <h5>Total : {Rupiah(transactions?.price)}</h5>
             <Button
             onClick={() => handleBuy.mutate(i.id)}
             className="btn btn-dark">PAY NOW</Button>
