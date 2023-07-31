@@ -110,16 +110,14 @@ export const MyBooking = () => {
                   <h5 className="text-secondary">{transactions?.check_out}</h5>
                 </div>
               </div>
-              <div className="ms-5 mt-1">
-                <div>
+              <div className="ms-5">
                   <h5 className="fw-bold">Amenities</h5>
                   {transactions?.house.amenities?.map((amenity, idx) => (
                 <h5 key={idx} className="text-secondary">
                     {amenity},
                 </h5>
                   ))}
-                </div>
-                <div className="mt-4">
+                <div className="mt-1">
                   <h5 className="fw-bold">Type Of Rent</h5>
                   <h5 className="text-secondary">{transactions?.house.type_rent}</h5>
                 </div>

@@ -1,17 +1,13 @@
 package handlers
 
 import (
-	"context"
 	"fmt"
 	dto "housy/dto/result"
 	"housy/models"
 	"housy/repositories"
 	"net/http"
-	"os"
 	"strconv"
 
-	"github.com/cloudinary/cloudinary-go/v2"
-	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"gorm.io/datatypes"
@@ -40,20 +36,7 @@ func (h *handlerHouse) CreateHouse(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "error3"})
 	}
 
-	ctx := context.Background()
-	CLOUD_NAME := os.Getenv("CLOUD_NAME")
-	API_KEY := os.Getenv("API_KEY")
-	API_SECRET := os.Getenv("API_SECRET")
 	dataFile := c.Get("dataFile").(string)
-
-	cldnr, err := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "error4"})
-	}
-	resp, err := cldnr.Upload.Upload(ctx, dataFile, uploader.UploadParams{Folder: "ilham_housy"})
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "error5"})
-	}
 
 	house := models.House{
 		Name:        c.FormValue("name"),
@@ -65,7 +48,7 @@ func (h *handlerHouse) CreateHouse(c echo.Context) error {
 		Bedroom:     bedroom,
 		Bathroom:    bathroom,
 		Area:        c.FormValue("area"),
-		Image:       resp.SecureURL,
+		Image:       dataFile,
 		Description: c.FormValue("description"),
 	}
 

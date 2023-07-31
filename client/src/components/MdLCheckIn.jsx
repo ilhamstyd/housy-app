@@ -63,13 +63,6 @@ export default function MdLCheckIn(props) {
       console.log("add transaction", response.data.data);
 
       if (response.status === 200) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Berhasil Menambahkan Transaction Baru!",
-          showConfirmButton: true,
-          timer: 1500,
-        });
         setForm({
           check_in: "",
           check_out: "",
@@ -77,13 +70,6 @@ export default function MdLCheckIn(props) {
         navigate(`/my-booking/${response.data.data.id}`)
       }
     } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Gagal Menambahkan Transaction Baru!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
       console.log(error);
     }
     props.onHide()

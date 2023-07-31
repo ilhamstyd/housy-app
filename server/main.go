@@ -5,6 +5,7 @@ import (
 	"housy/database"
 	"housy/pkg/mysql"
 	"housy/routes"
+	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -17,19 +18,21 @@ func main() {
 
 	e := echo.New()
 
+	var port = os.Getenv("PORT")
+
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{},
 		AllowMethods: []string{echo.GET, echo.POST, echo.PATCH, echo.DELETE},
 		AllowHeaders: []string{"X-Requested-With", "Content-Type", "Authorization"},
 	}))
 
-	e.Static("/uploads", "/uploads")
+	// e.Static("/uploads", "/uploads")
 
 	mysql.DatabaseInit()
 	database.RunMigration()
 
 	routes.RouteInit(e.Group("api/v1"))
 
-	e.Logger.Fatal(e.Start(":5000"))
+	e.Logger.Fatal(e.Start(":" + port))
 	fmt.Println("server running on localhost 5000 bosku😊")
 }

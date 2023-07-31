@@ -15,6 +15,7 @@ import { UserContext } from "./UserContext/UserContext";
 import { History } from "./pages/Prepare";
 import { useQuery } from "react-query";
 import { MyBookingPending } from "./pages/MyBookingPending";
+import { PrivateRoute } from "./components/PrivatRoute";
 
 function App() {
 
@@ -101,12 +102,12 @@ const checkUser = async () => {
     <Routes>
       <Route path="/" element={<Home Price={Price} Bedroom={Bedroom} Bathroom={Bathroom} setSearch={setSearch} data={House} refetch={HouseRefecth} typeRent={TypeRent} setTypeRent={setTypeRent} setBedroom={setBedroom} setBathroom={setBathroom} setPrice={setPrice} />} />
       <Route path="/detail-property/:id" element={<DetailProperty/>} />     
-      <Route path="/list-transaction" element={<ListTransaction/>} />     
-      <Route path="/profile" element={<Profile/>} />     
+      <Route path="/history" element={<History/>} />     
       <Route path="/add-property" element={<AddProperty/>} />     
       <Route path="/my-booking/:id" element={<MyBookingPending/>} />     
+      <Route path="/profile" element={<Profile/>} />     
       <Route path="/my-booking" element={<MyBooking/>} />     
-      <Route path="/history" element={<History/>} />     
+      <Route path="/list-transaction" element={<ListTransaction/>} />     
     </Routes>
     </div>
   );
