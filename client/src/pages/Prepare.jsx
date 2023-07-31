@@ -148,7 +148,7 @@ export const History = () => {
               {transaction.status === "pending" ? (
               <h5 className="text-danger">Total : {Rupiah(transaction?.price)}</h5>                
               ):(
-                <h5 className="text-success">Total : RP. {Rupiah(transaction?.price)}</h5>
+                <h5 className="text-success">Total : {Rupiah(transaction?.price)}</h5>
               )}
             </div>
           </Card>
