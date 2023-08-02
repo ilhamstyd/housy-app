@@ -10,7 +10,10 @@ import Logout from "../assets/icon_logout.png"
 import icon_user from "../assets/icon_user.png"
 import cabin from "../assets/cabin_1.png"
 import bill from "../assets/icon_bill.png"
-
+import icon from "../assets/navbrand.png"
+import rumah1 from "../assets/rumah1.png"
+import search1 from "../assets/search1.png"
+ 
 function NavigationBar(props) {
   const Navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
@@ -58,7 +61,7 @@ function NavigationBar(props) {
           <Link to="/"><Navbar.Brand href="#">
             <img
               style={{ objectFit: "cover", height: "40px" }}
-              src="/images/icon.png"
+              src={icon}
               alt=""
             />
           </Navbar.Brand></Link>
@@ -82,7 +85,7 @@ function NavigationBar(props) {
                   />
                 <Button variant="light" onClick={() => props.refetch()}>
                   <img
-                    src="/images/search 1.png"
+                    src={search1}
                     style={{ objectFit: "cover", width: "25px" }}
                     />
                 </Button>

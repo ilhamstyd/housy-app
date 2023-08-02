@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "react-query";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Rupiah } from "../components/FormatIdr";
+import icon from "../assets/navbrand.png"
 
 export const MyBookingPending = () => {
   const i = useParams();
@@ -72,7 +73,7 @@ export const MyBookingPending = () => {
           style={{ width: "1035px", height: "344px", marginTop: "20px" }}
         >
           <div className="mt-3">
-            <img src="/images/Icon.png" alt="Rectangle" />
+            <img src={icon} alt="Rectangle" />
           </div>
           <div
             className="position-absolute text-end"

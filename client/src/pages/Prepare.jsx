@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import qr from "../assets/qr-code-1.png"
 import { Rupiah } from "../components/FormatIdr";
+import icon from "../assets/navbrand.png"
 
 export const History = () => {
 
@@ -30,7 +31,7 @@ export const History = () => {
             style={{ width: "1035px", height: "380px", marginTop:"20px" }}
           >
             <div className="mt-3">
-              <img src="/images/Icon.png" alt="Rectangle" />
+              <img src={icon} alt="Rectangle" />
             </div>
             <div
               className="position-absolute text-end"
