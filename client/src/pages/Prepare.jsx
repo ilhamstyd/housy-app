@@ -22,13 +22,11 @@ export const History = () => {
   );
   return (
     <div>
-      <Container className="mt-2 rounded-none shadow-none border-0 ml-20 me-3">
+      <Container className="rounded-none">
         <h3 className="fw-semibold text-center">MY HISTORY BOOKING</h3>
         {successTransactions?.map((transaction, index) => (
-          <Card
-          key={index}
-            className="ms-5"
-            style={{ width: "1035px", height: "380px", marginTop:"20px" }}
+          <Card key={index}
+            style={{ width: "1035px", height: "350px", marginTop:"50px" }}
           >
             <div className="mt-3">
               <img src={icon} alt="Rectangle" />
@@ -43,7 +41,7 @@ export const History = () => {
               </p>
               {transaction?.status === "success" ? (
                   <>
-                    <img className=" mt-3" src={qr} alt="" />
+                    <img className="" src={qr} alt="" />
                     <p className="mt-3">INV0101</p>
                   </>
                 ) : (
@@ -97,7 +95,7 @@ export const History = () => {
                   style={{ width: "0px", height: "50px" }}
                 ></div>
                 <div
-                  className="rounded-circle mt-3"
+                  className="rounded-circle"
                   style={{
                     width: "16px",
                     height: "16px",
@@ -115,12 +113,16 @@ export const History = () => {
                   <h5 className="text-secondary">{transaction?.check_out}</h5>
                 </div>
               </div>
-              <div className="ms-5 mt-1">
+              <div className="ms-5">
                 <div>
                   <h5 className="fw-bold">Amenities</h5>
-                  <h5 className="text-secondary">{transaction?.house.amenities}</h5>
+                  {transaction?.house?.amenities?.map((amenity, idx) => (
+                <h5 key={idx} className="text-secondary">
+                {amenity},
+                </h5>
+                  ))}
                 </div>
-                <div className="mt-4">
+                <div className="mt-1">
                   <h5 className="fw-bold">Type Of Rent</h5>
                   <h5 className="text-secondary">{transaction?.house.type_rent}</h5>
                 </div>
@@ -128,24 +130,24 @@ export const History = () => {
             </div>
 
             <div className="row">
-              <p className="col col-sm-2">No. Tanda Pengenal</p>
+              <p className="col col-sm-3">No. Tanda Pengenal</p>
               <p className="col col-sm-2">Nama Pemesan</p>
               <p className="col col-sm-2">No. Handphone</p>
-              <p className="col col-sm-2">Email</p>
-              <p className="col col-sm-3"></p>
+              <p className="col col-sm-3">Email</p>
+              <p className="col col-sm-2"></p>
               <hr />
             </div>
 
             <div className="row text-secondary">
-              <p className="col col-sm-2">{transaction?.user.id}</p>
+              <p className="col col-sm-3">{transaction?.user.id}</p>
               <p className="col col-sm-2">{transaction?.user.fullname}</p>
               <p className="col col-sm-2">{transaction?.user.phone}</p>
               <p className="col col-sm-3">{transaction?.user.email}</p>
-              <p className="col text-black col-sm-3 text-center fw-bold">
-                Long Time Rent : {transaction?.total_duration} {transaction?.house.type_rent} 
+              <p className="col col-sm-2 text-black text-center fw-bold">
+              Long Time Rent : {transaction?.total_duration} {transaction?.house.type_rent} 
               </p>
             </div>
-            <div className="mb-5" style={{ marginLeft: "700px"}}>
+            <div className="col-12 text-end mb-5">
               {transaction.status === "pending" ? (
               <h5 className="text-danger">Total : {Rupiah(transaction?.price)}</h5>                
               ):(

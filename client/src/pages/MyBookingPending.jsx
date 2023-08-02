@@ -67,9 +67,9 @@ export const MyBookingPending = () => {
 
   return (
     <div>
-      <Container className="mt-2 rounded-none shadow-none border-0 ml-20 me-3">
+      <Container className="rounded-none shadow-none">
         <h3 className="fw-semibold text-center">MY BOOKING</h3>
-        <Card className="ms-5"
+        <Card className=""
           style={{ width: "1035px", height: "344px", marginTop: "20px" }}
         >
           <div className="mt-3">
@@ -155,20 +155,20 @@ export const MyBookingPending = () => {
           </div>
 
           <div className="row">
-            <p className="col col-sm-2">No. Tanda Pengenal</p>
+            <p className="col col-sm-3">No. Tanda Pengenal</p>
             <p className="col col-sm-2">Nama Pemesan</p>
             <p className="col col-sm-2">No. Handphone</p>
             <p className="col col-sm-3">Email</p>
-            <p className="col col-sm-3"></p>
+            <p className="col col-sm-2"></p>
             <hr />
           </div>
 
           <div className="row text-secondary">
-            <p className="col col-sm-2">{transactions?.user.id}</p>
+            <p className="col col-sm-3">{transactions?.user.id}</p>
             <p className="col col-sm-2">{transactions?.user.fullname}</p>
             <p className="col col-sm-2">{transactions?.user.phone}</p>
             <p className="col col-sm-3">{transactions?.user.email}</p>
-            <p className="col text-black col-sm-3 text-center fw-bold">
+            <p className="col text-black col-sm-2 text-center fw-bold">
               Long Time Rent : {transactions?.total_duration} {transactions?.house.type_rent}
             </p>
           </div>
@@ -179,7 +179,7 @@ export const MyBookingPending = () => {
             <h5>Total : {Rupiah(transactions?.price)}</h5>
             <Button
             onClick={() => handleBuy.mutate(i.id)}
-            className="btn btn-dark">PAY NOW</Button>
+            className="btn btn-dark mb-5">PAY NOW</Button>
           </div>
         </Card>
       </Container>

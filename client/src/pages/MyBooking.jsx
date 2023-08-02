@@ -18,13 +18,12 @@ export const MyBooking = () => {
 
   return (
     <div>
-      <Container className="mt-2 rounded-none shadow-none border-0 ml-20 me-3">
+      <Container className="rounded-none">
         <h3 className="fw-semibold text-center">MY BOOKING</h3>
         {transaction?.map((transactions, index) => (
           <Card
           key={index}
-            className="ms-5"
-            style={{ width: "1035px", height: "380px", marginTop:"20px" }}
+          style={{ width: "1035px", height: "350px", marginTop:"50px"}}
           >
             <div className="mt-3">
               <img src={icon} alt="Rectangle" />
@@ -126,24 +125,24 @@ export const MyBooking = () => {
             </div>
 
             <div className="row">
-              <p className="col col-sm-2">No. Tanda Pengenal</p>
+              <p className="col col-sm-3">No. Tanda Pengenal</p>
               <p className="col col-sm-2">Nama Pemesan</p>
               <p className="col col-sm-2">No. Handphone</p>
-              <p className="col col-sm-2">Email</p>
-              <p className="col col-sm-3"></p>
+              <p className="col col-sm-3">Email</p>
+              <p className="col col-sm-2"></p>
               <hr />
             </div>
 
             <div className="row text-secondary">
-              <p className="col col-sm-2">{transactions?.user.id}</p>
+              <p className="col col-sm-3">{transactions?.user.id}</p>
               <p className="col col-sm-2">{transactions?.user.fullname}</p>
               <p className="col col-sm-2">{transactions?.user.phone}</p>
               <p className="col col-sm-3">{transactions?.user.email}</p>
-              <p className="col text-black col-sm-3 text-center fw-bold">
+              <p className="col text-black col-sm-2 text-center fw-bold">
                 Long Time Rent : {transactions?.total_duration} {transactions?.house.type_rent} 
               </p>
             </div>
-            <div className="mb-5" style={{ marginLeft: "730px"}}>
+            <div className="col-12 text-end">
               {transactions?.status === "success" ? (
               <h5 className="text-success">Total : {Rupiah(transactions?.price)}</h5>                
               ):(

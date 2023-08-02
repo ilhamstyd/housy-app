@@ -92,7 +92,7 @@ function NavigationBar(props) {
                     </Form>
                     </div>
                     {state.isLogin === true? (state.user.role === "owner" ? (
-                    <Nav style={{marginLeft:"400px"}}>
+                    <Nav style={{marginLeft:"300px"}}>
                     <h5
                       className="fw-bold "
                       style={{ color: "black", marginTop: "20px" }}
@@ -138,7 +138,7 @@ function NavigationBar(props) {
                       </NavDropdown> 
                   </Nav>
                     ):(
-                      <Nav style={{marginLeft:"400px"}}>
+                      <Nav style={{marginLeft:"300px"}}>
                     <h5
                       className="fw-bold "
                       style={{ color: "black", marginTop: "20px" }}

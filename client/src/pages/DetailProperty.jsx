@@ -40,7 +40,7 @@ console.log("ini id detaiproperty", id)
             <img src={house?.image} alt="" className="col-3" />
             <img src={house?.image} alt="" className="col-3" />
             <img src={detailHouse_4} alt="" className="col-3" />
-            <p
+            {/* <p
               style={{
                 position: "absolute",
                 top: "75px",
@@ -49,18 +49,20 @@ console.log("ini id detaiproperty", id)
                 color: "white",
               }}
             >+5
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="text-star" style={{ marginLeft: "160px" }}>
           <h1 className="mt-3">{house?.name}</h1>
-          <div className="d-flex">
-            <h4>{Rupiah(house?.price)} / {house?.type_rent}</h4>
-            <h5 style={{ marginLeft: "510px" }}>{house?.bedroom} beds
+          <div className="row">
+            <h4 className="col-sm-4">{Rupiah(house?.price)}/{house?.type_rent}</h4>
+            <div className="d-flex col-sm-6" style={{marginLeft:"160px"}}>
+            <h5 className="" style={{marginLeft:"50px"}}>{house?.bedroom} beds
             <img src={bed_1} className="ms-2"/></h5>
-            <h5 style={{ marginLeft: "10px" }}>{house?.bathroom} bath
+            <h5 className="ms-2">, {house?.bathroom} bath
             <img src={bath_1} className="ms-2"/></h5>
-            <h5 style={{ marginLeft: "10px" }}>1.800 ft</h5>
+            <h5 className="ms-2">, 1.800 ft</h5>
+            </div>
           </div>
           <h5 className="mt-3">Description</h5>
           <p style={{maxWidth:"810px"}}>{house?.description}</p>
