@@ -67,6 +67,7 @@ func (h *handlerTransaction) CreateTransaction(c echo.Context) error {
 	}
 
 	transaction := models.Transaction{
+		ID:            transactionId,
 		CheckIn:       request.CheckIn,
 		CheckOut:      request.CheckOut,
 		UserID:        request.UserID,

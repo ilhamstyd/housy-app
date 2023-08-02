@@ -1,0 +1,7 @@
+ Username:    postgres
+  Password:    qHbBJLJDoKeVTZw
+  Hostname:    housy-ilhams-db.internal
+  Flycast:     fdaa:2:8f9b:0:1::3
+  Proxy port:  5432
+  Postgres port:  5433
+  Connection string: postgres://postgres:qHbBJLJDoKeVTZw@housy-ilhams-db.flycast:5432
