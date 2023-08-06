@@ -70,12 +70,16 @@ const handleChange = (e) => {
       formData.set("type_rent", form.type_rent);
       formData.set("type_rent", form.type_rent);
       formData.set("amenities", JSON.stringify(form.amenities));
-
       formData.set("bedroom", form.bedroom);
       formData.set("bathroom", form.bathroom);
       formData.set("area", form.area);
-      formData.set("image", form.image[0], form.image[0].name);
       formData.set("description", form.description);
+
+      if (form.image && form.image.length > 0) {
+        for (let i = 0; i < form.image.length; i++) {
+          formData.append("image", form.image[i], form.image[i].name);
+        }
+      }
 
       
       const response = await API.post("/house", formData, config)

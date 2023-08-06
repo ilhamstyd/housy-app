@@ -17,7 +17,7 @@ type House struct {
 	Bedroom     int            `json:"bedroom" gorm:"type: int"`
 	Bathroom    int            `json:"bathroom" gorm:"type: int"`
 	Area        string         `json:"area" gorm:"type: varchar(255)"`
-	Image       string         `json:"image" gorm:"type: varchar(255)"`
+	Image       string         `json:"image" gorm:"type: varchar(1000)"`
 	Description string         `json:"description" gorm:"type: text"`
 	CreatedAt   time.Time      `json:"created_at"`
 	UpdatedAt   time.Time      `json:"updated_at"`

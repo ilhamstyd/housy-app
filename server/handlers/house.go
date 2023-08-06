@@ -7,6 +7,7 @@ import (
 	"housy/repositories"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
@@ -36,7 +37,8 @@ func (h *handlerHouse) CreateHouse(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "error3"})
 	}
 
-	dataFile := c.Get("dataFile").(string)
+	dataFile := c.Get("datafiles").([]string)
+	imageURL := strings.Join(dataFile, ",")
 
 	house := models.House{
 		Name:        c.FormValue("name"),
@@ -48,7 +50,7 @@ func (h *handlerHouse) CreateHouse(c echo.Context) error {
 		Bedroom:     bedroom,
 		Bathroom:    bathroom,
 		Area:        c.FormValue("area"),
-		Image:       dataFile,
+		Image:       imageURL,
 		Description: c.FormValue("description"),
 	}
 

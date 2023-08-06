@@ -25,31 +25,21 @@ console.log("ini id detaiproperty", id)
   const handleCloseCheckIn = () => {
       setShowCheckIn(false);
     };
-
+console.log("ini gambar",house?.image)
   return (
     <>
       <div className="container">
         <div className="row text-center mt-5">
           <div className="">
-            <img src={house?.image} alt="" className="col-9" />
+            <img src={house?.image.split(",")[0]} alt="" className="col-9" />
           </div>
         </div>
 
         <div className="row">
-          <div className="text-center" style={{ position: "relative" }}>
-            <img src={house?.image} alt="" className="col-3" />
-            <img src={house?.image} alt="" className="col-3" />
-            <img src={detailHouse_4} alt="" className="col-3" />
-            {/* <p
-              style={{
-                position: "absolute",
-                top: "75px",
-                left: "955px",
-                fontSize: "30px",
-                color: "white",
-              }}
-            >+5
-            </p> */}
+          <div className="text-center">
+            <img src={house?.image.split(",")[1]} alt="" className="col-3" />
+            <img src={house?.image.split(",")[2]} alt="" className="col-3" />
+            <img src={house?.image.split(",")[3]} alt="" className="col-3" />
           </div>
         </div>
         <div className="text-star" style={{ marginLeft: "160px" }}>

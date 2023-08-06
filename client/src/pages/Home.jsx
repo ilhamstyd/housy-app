@@ -7,24 +7,29 @@ import { API } from "../config/api";
 import { SideBar } from "../components/SideBar";
 import { Rupiah } from "../components/FormatIdr";
 
-
 function Home(props) {
   const [showForm, setShowForm] = useState(false);
   const handleCloseForm = () => {
-    setShowForm(false); 
-  }
+    setShowForm(false);
+  };
 
-  
-  const houses = props?.data 
+  const houses = props?.data;
 
 
   return (
     <>
-      <Button variant="dark" onClick={() => {setShowForm(true);}}> Find House </Button>
-      {/* <Col md={7} lg={8} className="bg-light p-4 ms-auto"> */}
+      <Button
+        variant="dark"
+        onClick={() => {
+          setShowForm(true);
+        }}
+      >
+        {" "}
+        Find House{" "}
+      </Button>
       <Row xs={1} md={2} lg={3} className="g-4">
         {houses?.map((item, index) => (
-          <Col className="" key={index} >
+          <Col className="" key={index}>
             <Link
               to={`/detail-property/${item.id}`}
               className="text-decoration-none text-dark"
@@ -33,7 +38,7 @@ function Home(props) {
               <Card className="h-100 shadow border p-2 mb-2 border-opacity-10">
                 <Card.Img
                   variant="top rounded"
-                  src={item.image}
+                  src={item.image.split(",")[0]}
                   className="position-relative"
                 />
                 <div className="position-absolute d-flex gap-2 align-item-center p-1">
@@ -49,7 +54,9 @@ function Home(props) {
                   ))}
                 </div>
                 <Card.Body className="px-0">
-                  <Card.Title className="fw-bold">{Rupiah(item.price)}</Card.Title>
+                  <Card.Title className="fw-bold">
+                    {Rupiah(item.price)}
+                  </Card.Title>
                   <Card.Text className="fw-semibold mb-0">
                     {item.bedroom} beds, {item.bathroom} bath, 1.800 sqft{" "}
                   </Card.Text>
@@ -61,7 +68,20 @@ function Home(props) {
             </Link>
           </Col>
         ))}
-        <SideBar show={showForm} onHide={handleCloseForm} Price={props.Price} Bedroom={props.Bedroom} Bathroom={props.Bathroom} setSearch={props.setSearch} refetch={props.refetch} typeRent={props.typeRent} setTypeRent={props.setTypeRent} setBedroom={props.setBedroom} setBathroom={props.setBathroom} setPrice={props.setPrice}/>
+        <SideBar
+          show={showForm}
+          onHide={handleCloseForm}
+          Price={props.Price}
+          Bedroom={props.Bedroom}
+          Bathroom={props.Bathroom}
+          setSearch={props.setSearch}
+          refetch={props.refetch}
+          typeRent={props.typeRent}
+          setTypeRent={props.setTypeRent}
+          setBedroom={props.setBedroom}
+          setBathroom={props.setBathroom}
+          setPrice={props.setPrice}
+        />
       </Row>
     </>
   );
